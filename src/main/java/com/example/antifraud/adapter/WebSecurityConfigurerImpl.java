@@ -1,4 +1,4 @@
-package com.example.antifraud.adapter;
+package antifraud.adapter;
 
 import com.example.antifraud.exception.RestAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
