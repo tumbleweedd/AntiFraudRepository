@@ -30,7 +30,7 @@ public class TransactionService {
     }
 
     public ResponseEntity<?> checkTransaction(TransactionModel deal) {
-        if (!checkCardValid(deal) || !checkIpValid(deal) || deal.getAmount() == null || deal.getAmount() < 1) {
+        if (deal.getIp() == null || deal.getNumber() == null || !checkCardValid(deal) || !checkIpValid(deal) || deal.getAmount() == null || deal.getAmount() < 1) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else if (stolenCardIsPresent(deal) || suspiciousIpIsPresent(deal) || deal.getAmount() > MAX_AMOUNT_FOR_MANUAL_PROCESSING) {
             TransactionModel deal1 = setValues(deal, "PROHIBITED");
@@ -88,7 +88,7 @@ public class TransactionService {
         listOfResult.forEach(x -> mapOfInfo.put("result", x));
         for (String s : listOfInfo) {
             if (mapOfInfo.containsKey("info")) {
-                mapOfInfo.put("info", mapOfInfo.get("info") +", " + s);
+                mapOfInfo.put("info", mapOfInfo.get("info") + ", " + s);
             } else {
                 mapOfInfo.put("info", s);
             }

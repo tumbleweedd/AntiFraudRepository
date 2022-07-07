@@ -1,4 +1,4 @@
-package antifraud.adapter;
+package com.example.antifraud.adapter;
 
 import com.example.antifraud.exception.RestAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +30,7 @@ public class WebSecurityConfigurerImpl extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .mvcMatchers("/api/auth/user").permitAll()
+                .mvcMatchers("/api/auth/user", "/actuator/shutdown").permitAll()
                 .mvcMatchers("/api/antifraud/transaction").hasRole("MERCHANT")
                 .mvcMatchers("/api/antifraud/**").hasRole("SUPPORT")
                 .mvcMatchers("/api/auth/list").hasAnyRole("SUPPORT", "ADMINISTRATOR")

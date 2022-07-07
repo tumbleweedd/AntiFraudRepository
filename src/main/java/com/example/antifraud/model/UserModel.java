@@ -33,7 +33,7 @@ public class UserModel {
     private Role role;
 
     @JsonIgnore
-    private boolean userBlocked;
+    private boolean isAccountNonLocked = false;
 
     public UserModel(String name, String username, String password) {
         this.name = name;

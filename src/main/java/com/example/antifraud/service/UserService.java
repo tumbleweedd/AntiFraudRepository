@@ -42,11 +42,11 @@ public class UserService {
 
     public void setUserRole(UserModel user) {
         if (userRepository.findAll().size() == 0) {
-            user.setUserBlocked(false);
+            user.setAccountNonLocked(true);
             user.setRole(Role.ADMINISTRATOR);
         } else {
             user.setRole(Role.MERCHANT);
-            user.setUserBlocked(true);
+            user.setAccountNonLocked(false);
         }
     }
 
@@ -96,11 +96,11 @@ public class UserService {
 
         String lockResult = null;
         if (usernameAndStatus.getOperation() == Lock.LOCK) {
-            user.setUserBlocked(true);
+            user.setAccountNonLocked(false);
             userRepository.save(user);
             lockResult = String.valueOf(Lock.LOCK);
         } else if (usernameAndStatus.getOperation() == Lock.UNLOCK) {
-            user.setUserBlocked(false);
+            user.setAccountNonLocked(true);
             userRepository.save(user);
             lockResult = String.valueOf(Lock.UNLOCK);
         }
